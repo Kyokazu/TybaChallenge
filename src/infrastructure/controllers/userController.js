@@ -1,8 +1,10 @@
-export default {
-  signup: (req, res) => {
-    res.send("Signup test ");
-  },
-  login: (req, res) => {
-    res.send("Login test ");
-  },
+import { registerUser } from "../../application/usecases/registerUser.js";
+
+export const signup = async (req, res) => {
+  try {
+    const result = await registerUser(req.body);
+    res.status(201).json(result);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
 };

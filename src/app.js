@@ -13,8 +13,6 @@ app.use(express.json());
 
 app.use("/api/users",userRoutes);
 
-console.log('⛳ MONGO_URI:', process.env.MONGO_URI);
-
 app.get("/", (req, res) => {
     res.send("Welcome to Tyba Challenge");
 });
