@@ -20,3 +20,6 @@
 
 ### V3
 * Funcionalidad a: Registro de usuario.
+
+### V4
+* Funcionalidad b: Login de usuario.
