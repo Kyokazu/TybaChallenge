@@ -1,21 +1,24 @@
 version: "3.8"
+
 services:
-tybachallenge:
-  build: .
-  ports:
+  tybachallenge:
+    build: .
+    container_name: tybachallenge
+    ports:
     - "3000:3000"
-  volumes:
-    - ./tybachallenge
-  env_file:
+    volumes:
+    - .:/app
+    env_file:
     - .env
-  depends_on:
+    depends_on:
     - mongo
 
-mongo:
-  image: mongo
-  ports:
+  mongo:
+   image: mongo
+   container_name: tybachallenge_mongo
+   ports:
     - "27017:27017"
-  volumes:
+   volumes:
     - mongo_data:/data/db
 
 volumes:

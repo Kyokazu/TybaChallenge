@@ -1,16 +1,18 @@
-
 {
     "name": "tybachallenge",
     "version": "1.0.0",
     "description": "",
     "main": "app.js",
     "scripts": {
-      "test": "No tests ATM."
+        "start": "node src/app.js",
+        "dev": "nodemon src/app.js",
+        "test": "mocha"
     },
     "keywords": [],
     "author": "Juan Manuel Huertas",
     "dependencies": {
-      "express": "^4.18.2",
-      "mongoose": "^6.6.5"
+        "dotenv": "^17.2.0",
+        "express": "^4.18.2",
+        "mongoose": "^6.6.5"
     }
 }

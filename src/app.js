@@ -1,7 +1,7 @@
 import express from 'express';
 import dotev from 'dotenv';
 import mongoose from 'mongoose';
-import userRoutes from './routes/user.routes.js';
+import userRoutes from './routes/userRoutes.js';
 
 
 // Configuramos el entorno 
@@ -13,6 +13,7 @@ app.use(express.json());
 
 app.use("/api/users",userRoutes);
 
+console.log('⛳ MONGO_URI:', process.env.MONGO_URI);
 
 app.get("/", (req, res) => {
     res.send("Welcome to Tyba Challenge");
@@ -20,7 +21,7 @@ app.get("/", (req, res) => {
 
 //Configuración a la persistencia (En este caso, usaremos mongo a través de mongoose)
 
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGO_URI)
 .then(() => {
     app.listen(port, () => {
         console.log(`Server running on port: ${port}`);
