@@ -6,6 +6,7 @@ export const getZoneRestaurants = async ({ location, userId }) => {
   const API_KEY = process.env.GOOGLE_API_KEY;
   const endpoint = "https://maps.googleapis.com/maps/api/place/textsearch/json";
   let response;
+  var list;
   console.log(location);
   const query = "Restaurantes en " + location;
   //Verifico que exista un valor de ciudad/coordenada
@@ -13,17 +14,20 @@ export const getZoneRestaurants = async ({ location, userId }) => {
     //Primero verifico si viene en valor de coordenadas.
     if (location.lat && location.lng) {
       console.log("Entró a coordenadas");
-      response = await axios.get(
-        "https://maps.googleapis.com/maps/api/place/nearbysearch/json",
-        {
-          params: {
-            location: `${location.lat},${location.lng}`,
-            radius: 1500,
-            type: "restaurant",
-            key: API_KEY,
-          },
-        }
-      );
+      response = await axios.get(endpoint, {
+        params: {
+          location: `${location.lat},${location.lng}`,
+          radius: 1500,
+          type: "restaurant",
+          key: API_KEY,
+        },
+      });
+      list = response.data.results
+        .filter((result) => result.types.includes("restaurant"))
+        .map((result) => ({
+          name: result.name,
+          address: result.formatted_address,
+        }));
       await saveUserAction(userId, `getRestaurants`);
       //Si no es coordenada, es una ciudad
     } else {
@@ -36,19 +40,20 @@ export const getZoneRestaurants = async ({ location, userId }) => {
           key: API_KEY,
         },
       });
+      list = response.data.results
+        .filter(
+          (result) =>
+            result.types.includes("restaurant") &&
+            result.formatted_address.includes(location)
+        )
+        .map((result) => ({
+          name: result.name,
+          address: result.formatted_address,
+        }));
       await saveUserAction(userId, `getRestaurants`);
     }
   }
-  const list = response.data.results
-    .filter(
-      (result) =>
-        result.types.includes("restaurant") &&
-        result.formatted_address.includes(location)
-    )
-    .map((result) => ({
-      name: result.name,
-      address: result.formatted_address,
-    }));
+
   if (list.length > 0) {
     return list;
   }

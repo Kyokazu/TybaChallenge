@@ -9,7 +9,8 @@ export const authJwt = (req, res, next) => {
 
   try {
     const decoded = jws.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;
+    console.log(decoded.id);
+    req.user = { id: decoded.id };
     next();
   } catch (err) {
     res.status(401).json({ message: "Token inválido" });

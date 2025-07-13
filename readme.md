@@ -26,3 +26,7 @@
 
 ### V5
 * Funcionalidad c: Lista de restaurantes en la zona
+
+### V6
+* Funcionalidad d: Consulta de Logs del usuario logeado.
+
