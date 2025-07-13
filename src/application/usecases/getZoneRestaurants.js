@@ -2,6 +2,16 @@ import axios from "axios";
 import { saveUserAction } from "../../infrastructure/database/models/actionsLog.js";
 
 //Caso de uso: Obtener los restaurantes de una zona
+
+
+/* El formato de parámetro que recibe es {location: "Bogotá"}
+*  Cuando es una coordenada, el parámetro es {
+  "location": {
+    "lat": 7.848737131495137,
+    "lng": -72.4960191354474
+  }
+}
+*/
 export const getZoneRestaurants = async ({ location, userId }) => {
   //Obtengo la Key y el endpoint de la API de Google.
   const API_KEY = process.env.GOOGLE_API_KEY;

@@ -4,6 +4,12 @@ import userModel from "../../infrastructure/database/models/userModel.js";
 import { saveUserAction } from "../../infrastructure/database/models/actionsLog.js";
 
 // Caso de uso: Login de usuario
+/*Parámetro de ingreso de login:
+*{
+  "email": "nombre@dominio.com",
+  "password": "password"
+}
+*/
 export const loginUser = async ({ email, password }) => {
   // Buscar que existe un usuario registrado con ese correo
   const user = await userModel.findOne({ email });

@@ -5,6 +5,13 @@ import { saveUserAction } from "../../infrastructure/database/models/actionsLog.
 import e from "express";
 
 //Caso de uso: Registro de usuario
+/*Parámetro de ingreso de registro:
+*{
+*  "email": "nombre@dominio.com",
+*  "name": "nombre",
+*  "password": "password"
+*}
+*/
 export const registerUser = async ({ email, name, password }) => {
   //Primero revisamos si ya existe un usuario registrado, email debe ser único
   const existingUser = await userModel.findOne({ email });

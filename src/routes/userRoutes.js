@@ -5,6 +5,7 @@ import { actionLogsController } from "../infrastructure/controllers/actionLogsCo
 import { authJwt } from "../middleware/authJwt.js";
 import { logout } from "../infrastructure/controllers/userController.js";
 
+
 //Router de usuarios
 
 const router = express.Router();
