@@ -25,7 +25,7 @@ export const registerUser = async ({ email, name, password }) => {
 
   //Guardamos el nuevo usuario con la contraseña hasheada
   const userSaved = await newUser.save();
-  await saveUserAction(userSaved);
+  await saveUserAction(userSaved, "signup");
   return {
     id: userSaved._id,
     email: userSaved.email,

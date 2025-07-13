@@ -23,3 +23,6 @@
 
 ### V4
 * Funcionalidad b: Login de usuario.
+
+### V5
+* Funcionalidad c: Lista de restaurantes en la zona
