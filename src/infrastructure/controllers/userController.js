@@ -1,5 +1,6 @@
 import { registerUser } from "../../application/usecases/registerUser.js";
 import { loginUser } from "../../application/usecases/loginUser.js";
+import { logoutUser } from "../../application/usecases/logoutUser.js";
 
 export const signup = async (req, res) => {
   try {
@@ -19,4 +20,14 @@ export const login = async (req, res) => {
   }
 };
 
+export const logout = async (req, res) => {
+  try {
+    const { id, token, exp } = req.user;
+    const expiredAt = new Date(exp * 1000);
 
+    const result = await logoutUser(id, token, expiredAt);
+    return res.status(200).json(result);
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+};

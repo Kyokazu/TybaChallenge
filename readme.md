@@ -30,3 +30,6 @@
 ### V6
 * Funcionalidad d: Consulta de Logs del usuario logeado.
 
+### v7
+* Funcionalidad e: Logout (Extra, Blacklist de tokens)
+
