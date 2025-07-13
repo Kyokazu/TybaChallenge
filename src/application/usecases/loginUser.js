@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import userModel from "../../infrastructure/database/models/userModel.js";
 import { saveUserAction } from "../../infrastructure/database/models/actionsLog.js";
 
-// Login de usuario
+// Caso de uso: Login de usuario
 export const loginUser = async ({ email, password }) => {
   // Buscar que existe un usuario registrado con ese correo
   const user = await userModel.findOne({ email });
@@ -11,7 +11,7 @@ export const loginUser = async ({ email, password }) => {
     throw new Error("Usuario no registrado");
   }
   //Verificar credenciales
-  //Error NO debe mencionar que valor es el incorrecto(email/password)
+  //Error NO debe mencionar cual valor es el incorrecto(email/password)
   const passValidation = await bcrypt.compare(password, user.password);
   if (!passValidation) {
     throw new Error("Credenciales no válidas");

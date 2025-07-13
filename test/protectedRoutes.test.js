@@ -5,8 +5,7 @@ import app from "../src/app.js";
 import { tokenBlacklist } from "../src/infrastructure/database/models/tokenBlacklist.js";
 
 describe("Rutas protegidas", () => {
-
-   //Genero un usuario de test
+  //Genero un usuario de test
   const userData = {
     email: `juanRouteTest${Date.now()}@gmail.com`,
     name: "juanRouteTest",
@@ -32,6 +31,7 @@ describe("Rutas protegidas", () => {
     await mongoose.connection.close();
   });
 
+  //Caso de Prueba: Verificamos que la petición sin token falle
   it("Error por petición sin token", async () => {
     const res = await request(app)
       .post("/api/restaurants/getRestaurants")
@@ -40,7 +40,7 @@ describe("Rutas protegidas", () => {
     expect(res.statusCode).toBe(401);
     expect(res.body).toHaveProperty("message", "Token no proporcionado");
   });
-
+  //Caso de Prueba: Verificamos que la petición con token sea exitosa
   it(" Consulta válida con token válido", async () => {
     const res = await request(app)
       .post("/api/restaurants/getRestaurants")
@@ -48,9 +48,10 @@ describe("Rutas protegidas", () => {
       .send({ location: "Bogotá" });
 
     expect(res.statusCode).toBe(200);
-    expect(Array.isArray(res.body)).toBe(true); // Asumiendo que devuelve un array de restaurantes
+    expect(Array.isArray(res.body)).toBe(true);
   });
 
+  // Caso de Prueba: Verificamos que la petición con token inválido falle.
   it("Error por acceso con token invalido/logout", async () => {
     // Simulamos logout agregando el token a la blacklist
     await tokenBlacklist.create({ token, expiredAt });

@@ -25,6 +25,7 @@ describe("Auth enpoints", () => {
       .post("/api/users/signup")
       .send(userData);
 
+    //Verifico la respuesta.
     expect(response.statusCode).toBe(201);
     expect(response.body).toHaveProperty("id");
     expect(response.body).toHaveProperty("name", userData.name);
@@ -37,7 +38,7 @@ describe("Auth enpoints", () => {
       email: userData.email,
       password: userData.password,
     });
-
+    //Verifico la respuesta.
     expect(response.statusCode).toBe(200);
     expect(response.body).toHaveProperty("token");
   });

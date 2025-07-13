@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+//Esquema de logs
 const actionLogSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,

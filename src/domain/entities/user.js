@@ -1,3 +1,4 @@
+//Entidad de Usuario
 export class user {
   constructor({ email, name, password }) {
     //Requerir si o si que los usuarios llenen todos los campos.

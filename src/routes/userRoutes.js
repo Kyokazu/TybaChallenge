@@ -5,10 +5,14 @@ import { actionLogsController } from "../infrastructure/controllers/actionLogsCo
 import { authJwt } from "../middleware/authJwt.js";
 import { logout } from "../infrastructure/controllers/userController.js";
 
+//Router de usuarios
+
 const router = express.Router();
 
 router.post("/signup", signup);
 router.post("/login", login);
+//Usamos el middleware de Auth para proteger las rutas que exigen JWT
+//Además que con ese middleware extraemos los datos de la sesión.
 router.get("/logs", authJwt, actionLogsController);
 router.get("/logout", authJwt, logout);
 

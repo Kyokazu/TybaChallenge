@@ -1,8 +1,11 @@
 import jwt from "jsonwebtoken";
 import { tokenBlacklist } from "../infrastructure/database/models/tokenBlacklist.js";
 
+// Middleware de Auth, valida el token con verify
 export const authJwt = async (req, res, next) => {
+  // Obtenemos la información del header y extraemos el token
   const authHeader = req.headers.authorization;
+  //Quitamos el "Bearer " del token.
   const token = authHeader && authHeader.split(" ")[1];
 
   if (!token) {
@@ -18,7 +21,7 @@ export const authJwt = async (req, res, next) => {
     // Verificar token y extraer datos
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // Guardamos el token y el userId en `req.user`
+    // Guardamos datos del usuario en el request.
     req.user = {
       id: decoded.id,
       token: token,

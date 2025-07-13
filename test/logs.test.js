@@ -7,6 +7,7 @@ describe("Historial de logs del usuario", () => {
   let token;
   let userId;
 
+  //Genero un usuario de test
   const userData = {
     email: `juanlogtest${Date.now()}@gmail.com`,
     name: "juanlogtest",
@@ -23,6 +24,7 @@ describe("Historial de logs del usuario", () => {
       password: userData.password,
     });
 
+    //Extraigo la informacion del token
     token = loginRes.body.token;
     const decoded = jwt.decode(token);
     userId = decoded.id;
@@ -33,11 +35,11 @@ describe("Historial de logs del usuario", () => {
       .set("Authorization", `Bearer ${token}`)
       .send({ location: "Bogotá" });
   });
-
+  // Libero la conexión cuando termine todos los test
   afterAll(async () => {
     await mongoose.connection.close();
   });
-
+  // Caso de prueba: Obtener los logs de un usuario
   it("✅ Debería devolver los logs del usuario autenticado", async () => {
     const res = await request(app)
       .get("/api/users/logs")

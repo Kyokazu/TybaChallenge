@@ -4,6 +4,7 @@ import { user } from "../../domain/entities/user.js";
 import { saveUserAction } from "../../infrastructure/database/models/actionsLog.js";
 import e from "express";
 
+//Caso de uso: Registro de usuario
 export const registerUser = async ({ email, name, password }) => {
   //Primero revisamos si ya existe un usuario registrado, email debe ser único
   const existingUser = await userModel.findOne({ email });
@@ -25,6 +26,7 @@ export const registerUser = async ({ email, name, password }) => {
 
   //Guardamos el nuevo usuario con la contraseña hasheada
   const userSaved = await newUser.save();
+  //Registro en el log
   await saveUserAction(userSaved, "signup");
   return {
     id: userSaved._id,

@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
-//Se crea el esquema para MongoDB.
-
+//Se crea el esquema de usuarios.
 const userScheme = new mongoose.Schema(
   {
     email: { type: String, required: true },
