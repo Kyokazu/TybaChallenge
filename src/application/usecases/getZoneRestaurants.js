@@ -7,13 +7,11 @@ export const getZoneRestaurants = async ({ location, userId }) => {
   const endpoint = "https://maps.googleapis.com/maps/api/place/textsearch/json";
   let response;
   var list;
-  console.log(location);
   const query = "Restaurantes en " + location;
   //Verifico que exista un valor de ciudad/coordenada
   if (location) {
     //Primero verifico si viene en valor de coordenadas.
     if (location.lat && location.lng) {
-      console.log("Entró a coordenadas");
       response = await axios.get(endpoint, {
         params: {
           location: `${location.lat},${location.lng}`,
@@ -31,9 +29,6 @@ export const getZoneRestaurants = async ({ location, userId }) => {
       await saveUserAction(userId, `getRestaurants`);
       //Si no es coordenada, es una ciudad
     } else {
-      console.log("Entró a ciudad");
-      console.log(query);
-
       response = await axios.get(endpoint, {
         params: {
           query,

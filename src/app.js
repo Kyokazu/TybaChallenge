@@ -1,6 +1,5 @@
 import express from "express";
 import dotev from "dotenv";
-import mongoose from "mongoose";
 import userRoutes from "./routes/userRoutes.js";
 import restaurantRoutes from "./routes/restaurantRoutes.js";
 
@@ -12,20 +11,9 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 app.use("/api/users", userRoutes);
-
 app.use("/api/restaurants", restaurantRoutes);
-
 app.get("/", (req, res) => {
   res.send("Welcome to Tyba Challenge");
 });
 
-//Configuración a la persistencia (En este caso, usaremos mongo a través de mongoose)
-
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => {
-    app.listen(port, () => {
-      console.log(`Server running on port: ${port}`);
-    });
-  })
-  .catch((error) => console.log("Error en la conexión a MongoDB", error));
+export default app;
